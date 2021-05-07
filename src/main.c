@@ -98,18 +98,14 @@ void wifi_init_softap(void)
     wifi_config_t wifi_config = {
         .ap = {
             .ssid = "ESP32",
-            .password = "123456",
-            .authmode = WIFI_AUTH_WPA_WPA2_PSK,
+            //.password = "12345678",
+            .authmode = WIFI_AUTH_OPEN, //WIFI_AUTH_WPA_WPA2_PSK,
             .channel = 6,
             .max_connection = 10,
             .ssid_hidden = 0
         }
     };
-    if (strlen("123456") == 0) {
-        wifi_config.ap.authmode = WIFI_AUTH_OPEN;
-    }
     
-
     ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_AP));
     ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_AP, &wifi_config));
     ESP_ERROR_CHECK(esp_wifi_start());
